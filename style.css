@@ -1,0 +1,65 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background-image: url("151.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  color: #292929;
+}
+
+h1 {
+font-family: Helvetica;
+font-size: 25px;
+position: relative;
+left: 20px;
+top: 40px;
+}
+
+p {
+color: #0a0a0a;
+margin-left: 20px;
+font-family: Helvetica;
+font-size: 25px
+}
+
+#d1 {
+	margin-top: 10px;
+}
+
+#brushColor {
+	margin-left: 10px;
+}
+
+#fileUploader {
+margin-left: 7px;
+font-family: Helvetica;
+font-style: italic;
+font-size: 18px;
+padding: 7px;
+}
+
+#downloadBTN {
+  position: relative;
+  right: 50px;
+}
+
+
+.colorButtons {
+  width: 200px;
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
+  padding: 7px;	
+}
+
+.clearButton {
+width: 200px;
+  font-family: Helvetica;
+  font-size: 15px;
+  font-weight: bolder;
+  margin-left: 10px;
+  padding: 7px;		
+}
