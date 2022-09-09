@@ -31,7 +31,8 @@ document.getElementById("sizeOutput").value = newSize;
 }
 
 function doChange() {
-	canvas.style.backgroundColor = pickerColor.value;
+	context.fillStyle = pickerColor.value;
+	context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function draw(x, y) {
