@@ -485,9 +485,9 @@ var __SimpleImageUtilities = (function() {
 })();
 
 function doUpload() {
-	let imgCanvas = canvas;
-	let fileUpload = document.getElementById("fileUploader");
-	let image = new SimpleImage(fileUpload);
+	var imgCanvas = canvas;
+	var fileUpload = document.getElementById("fileUploader");
+	var image = new SimpleImage(fileUpload);
 	image.drawTo(imgCanvas);
 }
 
