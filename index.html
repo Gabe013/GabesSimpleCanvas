@@ -15,7 +15,7 @@
 	<p> Set Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
 	<p> Set Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
 	<br>
-	<canvas id="d1" onmousedown="startPaint()" onmousemove="draw(event.offsetX, event.offsetY)" onmouseup="endPaint()" style="border:2px solid #000000;"> <!-- To-Do ontouchstart="startPaint()" ontouchmove="draw(event.offsetX, event.offsetY)" ontouchend="endPaint()"-->
+	<canvas id="d1" onmousedown="startPaint()" onmousemove="draw(event.offsetX, event.offsetY)" onmouseup="endPaint()" onmouseleave="endPaint()" style="border:2px solid #000000;"> <!-- To-Do ontouchstart="startPaint()" ontouchmove="draw(event.offsetX, event.offsetY)" ontouchend="endPaint()"-->
 	</canvas>
 	<p> Brush Color: <input type="color" id="brushColor" value="#000" onchange="changeBrushClr(this.value)"> Brush Size: <input type="range" id="sizeInput" min="1" max="50" oninput="brushSize(this.value)"/> <output id="sizeOutput">25</output> px </p>
 	<br>

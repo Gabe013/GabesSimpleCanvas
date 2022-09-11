@@ -2,7 +2,6 @@ var canvas = document.getElementById("d1");
 var context = canvas.getContext("2d");
 var sizeBrush = document.getElementById("sizeInput").value;
 var brushColor = document.getElementById("brushColor").value;
-var pickerColor = document.getElementById("colorPicker");
 var isPainting = false;
 
 function isNumeric(value) {
@@ -31,6 +30,7 @@ document.getElementById("sizeOutput").value = newSize;
 }
 
 function doChange() {
+	let pickerColor = document.getElementById("colorPicker");
 	context.fillStyle = pickerColor.value;
 	context.fillRect(0, 0, canvas.width, canvas.height);
 }
