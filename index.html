@@ -5,26 +5,26 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-	<title>Gabe's Simple Drawing Canvas WIPt</title>
+	<title>Gabe's Simple Drawing Canvas WIP</title>
 	<link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
   
 <body>
 	<h1> Gabe's Simple Drawing Canvas WIP 😊 </h1>
 	<br>
-	<p> Set Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
-	<p> Set Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
+	<p> Set Canvas Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
+	<p> Set Canvas Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
 	<br>
 	<canvas id="d1" onmousedown="startPaint()" onmousemove="draw(event.offsetX, event.offsetY)" onmouseup="endPaint()" onmouseleave="endPaint()" style="border:2px solid #000000;"> <!-- To-Do ontouchstart="startPaint()" ontouchmove="draw(event.offsetX, event.offsetY)" ontouchend="endPaint()"-->
 	</canvas>
 	<p> Brush Color: <input type="color" id="brushColor" value="#000" onchange="changeBrushClr(this.value)"> Brush Size: <input type="range" id="sizeInput" min="1" max="50" oninput="brushSize(this.value)"/> <output id="sizeOutput">25</output> px </p>
 	<br>
-	<input type="button" id="canvasChanger" class="colorButtons" value="Apply canvas color" onclick="doChange()"/>
+	<input type="button" id="canvasChanger" class="colorButtons" value="Apply canvas color" onclick="doChange()">
 	<input type="color" id="colorPicker" value="#ff0000"/>
-	<input type="button" id="clear" class="clearButton" value="Clear canvas" onclick="clearCanvas()"/>
+	<input type="button" id="clear" class="clearButton" value="Clear canvas" onclick="clearCanvas()">
 	<br>
-	<input type="file" id="fileUploader" multiple="false" accept='image/' onchange="doUpload()"/>
-	<input type="button" id="downloadBTN" value="Download Picture" onclick="downloadCanvas()"/>
+	<input type="file" id="fileUploader" multiple="false" accept='image/' onchange="doUpload()">
+	<input type="button" id="downloadBTN" value="Download Picture" onclick="downloadCanvas()">
 
 	<!--
   This script places a badge on your repl's full-browser view back to your repl's cover
