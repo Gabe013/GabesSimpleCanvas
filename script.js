@@ -1,6 +1,10 @@
 var canvasFg = document.getElementById("d1");
 var canvasBg = document.getElementById("d2");
 var context = canvasFg.getContext("2d");
+var fgImage = null;
+var bgImage = null;
+var file;
+var fileUpload;
 var sizeBrush = document.getElementById("sizeInput").value;
 var brushColor = document.getElementById("brushColor").value;
 var isPainting = false;
@@ -64,8 +68,12 @@ function doPaint() {
 
 
 function clearCanvas() {
-	context.clearRect(0, 0, canvasFg.width, canvasFg.height);
-	canvas.style.backgroundColor = 'transparent';
+	var fgCanCtx = canvasFg.getContext('2d');
+	fgCanCtx.clearRect(0, 0, canvasFg.width, canvasFg.height);
+	canvasFg.style.backgroundColor = 'transparent';
+	var bgCanCtx = canvasBg.getContext('2d');
+	bgCanCtx.clearRect(0, 0, canvasBg.width, canvasBg.height);
+	canvasBg.style.backgroundColor = 'transparent';
 	}
 
 
@@ -487,24 +495,60 @@ var __SimpleImageUtilities = (function() {
 
 function doFgUpload() {
 	var imgCanvasFg = canvasFg;
-	var fileUpload = document.getElementById("fgUploader");
-	var image = new SimpleImage(fileUpload);
-	image.drawTo(imgCanvasFg);
+	fileUpload = document.getElementById("fgUploader");
+	fgImage = new SimpleImage(fileUpload);
+	fgImage.drawTo(imgCanvasFg);
 }
 
 function doBgUpload() {
 	var imgCanvasBg = canvasBg;
-	var fileUpload = document.getElementById("bgUploader");
-	var image = new SimpleImage(fileUpload);
-	image.drawTo(imgCanvasBg);
+	fileUpload = document.getElementById("bgUploader");
+	bgImage = new SimpleImage(fileUpload);
+	bgImage.drawTo(imgCanvasBg);
 }
 
 function downloadCanvas() {  
-    var image = canvas.toDataURL();
+    image = canvasFg.toDataURL();
     var tmpLink = document.createElement("a");  
     tmpLink.download = "image.png";
     tmpLink.href = image;  
     document.body.appendChild( tmpLink );  
     tmpLink.click();  
     document.body.removeChild( tmpLink );  
+}
+
+function createComposite() {
+  // this function creates a new image with the dimensions of the foreground image and returns the composite green screen image
+  var output = new SimpleImage(fgImage.getWidth(),fgImage.getHeight());
+  var greenThreshold = 240;
+  for (var pixel of fgImage.values()) {
+    var x = pixel.getX();
+    var y = pixel.getY();
+    if (pixel.getGreen() > greenThreshold) {
+      //pixel is green, use background
+      var bgPixel = bgImage.getPixel(x,y);
+      output.setPixel(x,y,bgPixel);
+    }
+    else {
+      //pixel is not green, use foreground
+      output.setPixel(x,y,pixel);
+    }
+  }
+  return output;
+}
+
+function doGreenScreen() {
+  if(fgImage == null || !fgImage.complete()) {
+alert("Foreground image not loaded!");
+}
+if (bgImage == null || !bgImage.complete()) {
+alert("Background image not loaded!");
+}
+  if (fgImage.getWidth() != bgImage.getWidth() | fgImage.getHeight() != bgImage.getHeight())
+    {
+      alert("Size of images do not match, using size of foreground image...");
+bgImage.setSize(fgImage.getWidth(),fgImage.getHeight()); }
+  clearCanvas();
+   var finalImage = createComposite();
+  finalImage.drawTo(canvasFg);
 }
