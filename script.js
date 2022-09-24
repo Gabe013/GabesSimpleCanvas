@@ -1,5 +1,6 @@
-var canvas = document.getElementById("d1");
-var context = canvas.getContext("2d");
+var canvasFg = document.getElementById("d1");
+var canvasBg = document.getElementById("d2");
+var context = canvasFg.getContext("2d");
 var sizeBrush = document.getElementById("sizeInput").value;
 var brushColor = document.getElementById("brushColor").value;
 var isPainting = false;
@@ -11,13 +12,13 @@ function isNumeric(value) {
 	
 function setWidth(value) {
 	if (isNumeric(value) == true) {
-		canvas.width = value;
+		canvasFg.width = value;
 	} else { alert("Invalid input type, please enter a whole number, i.e. 300 or 1000") }
 }
 
 function setHeight(value) {
 	if (isNumeric(value) == true) {
-		canvas.height = value;
+		canvasFg.height = value;
 	} else { alert("Invalid input type, please enter a whole number, i.e. 300 or 1000") }
 }
 
@@ -32,7 +33,7 @@ document.getElementById("sizeOutput").value = newSize;
 function doChange() {
 	let pickerColor = document.getElementById("colorPicker");
 	context.fillStyle = pickerColor.value;
-	context.fillRect(0, 0, canvas.width, canvas.height);
+	context.fillRect(0, 0, canvasFg.width, canvasFg.height);
 }
 
 function draw(x, y) {
@@ -63,7 +64,7 @@ function doPaint() {
 
 
 function clearCanvas() {
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.clearRect(0, 0, canvasFg.width, canvasFg.height);
 	canvas.style.backgroundColor = 'transparent';
 	}
 
@@ -484,11 +485,18 @@ var __SimpleImageUtilities = (function() {
 	};
 })();
 
-function doUpload() {
-	var imgCanvas = canvas;
-	var fileUpload = document.getElementById("fileUploader");
+function doFgUpload() {
+	var imgCanvasFg = canvasFg;
+	var fileUpload = document.getElementById("fgUploader");
 	var image = new SimpleImage(fileUpload);
-	image.drawTo(imgCanvas);
+	image.drawTo(imgCanvasFg);
+}
+
+function doBgUpload() {
+	var imgCanvasBg = canvasBg;
+	var fileUpload = document.getElementById("bgUploader");
+	var image = new SimpleImage(fileUpload);
+	image.drawTo(imgCanvasBg);
 }
 
 function downloadCanvas() {  

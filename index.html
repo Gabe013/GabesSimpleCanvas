@@ -1,4 +1,4 @@
-<!--redesign the spacing between buttons and elements -->
+<!--redesign the spacing between buttons and elements --> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +17,19 @@
 	<br>
 	<canvas id="d1" onmousedown="startPaint()" onmousemove="draw(event.offsetX, event.offsetY)" onmouseup="endPaint()" onmouseleave="endPaint()" style="border:2px solid #000000;"> <!-- To-Do ontouchstart="startPaint()" ontouchmove="draw(event.offsetX, event.offsetY)" ontouchend="endPaint()"-->
 	</canvas>
+	<canvas id="d2" style="border:2px solid #000000;"></canvas>
 	<p> Brush Color: <input type="color" id="brushColor" value="#000" onchange="changeBrushClr(this.value)"> Brush Size: <input type="range" id="sizeInput" min="1" max="50" oninput="brushSize(this.value)"/> <output id="sizeOutput">25</output> px </p>
 	<br>
 	<input type="button" id="canvasChanger" class="colorButtons" value="Apply canvas color" onclick="doChange()">
 	<input type="color" id="colorPicker" value="#ff0000"/>
 	<input type="button" id="clear" class="clearButton" value="Clear canvas" onclick="clearCanvas()">
+<p> Foreground Image
+	<input type="file" id="fgUploader" multiple="false" accept='image/' onchange="doFgUpload()">
+	</p>
+	<p> Background Image
+	<input type="file" id="bgUploader" multiple="false" accept='image/' onchange="doBgUpload()">
+	</p>
 	<br>
-	<input type="file" id="fileUploader" multiple="false" accept='image/' onchange="doUpload()">
 	<input type="button" id="downloadBTN" value="Download Picture" onclick="downloadCanvas()">
 
 	<!--
