@@ -520,7 +520,7 @@ function downloadCanvas() {
 function createComposite() {
 	// this function creates a new image with the dimensions of the foreground image and returns the composite green screen image
 	var output = new SimpleImage(fgImage.getWidth(), fgImage.getHeight());
-	var greenThreshold = 240;
+	var greenThreshold = 250;
 	for (var pixel of fgImage.values()) {
 		var x = pixel.getX();
 		var y = pixel.getY();
