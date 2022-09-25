@@ -1,6 +1,6 @@
 var canvasFg = document.getElementById("d1");
+var fgCanCtx = canvasFg.getContext('2d');
 var canvasBg = document.getElementById("d2");
-var context = canvasFg.getContext("2d");
 var fgImage = null;
 var bgImage = null;
 var file;
@@ -13,7 +13,7 @@ function isNumeric(value) {
 	// standard JavaScript function to determine whether a string is an illegal number (Not-a-Number)
 	return !isNaN(value);
 }
-	
+
 function setWidth(value) {
 	if (isNumeric(value) == true) {
 		canvasFg.width = value;
@@ -30,25 +30,26 @@ function changeBrushClr(newColor) {
 	brushColor = newColor;
 }
 function brushSize(newSize) {
-sizeBrush = newSize;
-document.getElementById("sizeOutput").value = newSize;
+	sizeBrush = newSize;
+	document.getElementById("sizeOutput").value = newSize;
 }
 
 function doChange() {
 	let pickerColor = document.getElementById("colorPicker");
-	context.fillStyle = pickerColor.value;
-	context.fillRect(0, 0, canvasFg.width, canvasFg.height);
+	
+	fgCanCtx.fillStyle = pickerColor.value;
+	fgCanCtx.fillRect(0, 0, canvasFg.width, canvasFg.height);
 }
 
 function draw(x, y) {
-	if(!isPainting)return;
-	context.lineWidth = sizeBrush;
-	context.lineCap = "round";
-	context.lineTo(x, y);
-	context.stroke();
-	context.beginPath();
-    context.moveTo(x, y);
-	context.strokeStyle = brushColor;
+	if (!isPainting) return;
+	fgCanCtx.lineWidth = sizeBrush;
+	fgCanCtx.lineCap = "round";
+	fgCanCtx.lineTo(x, y);
+	fgCanCtx.stroke();
+	fgCanCtx.beginPath();
+	fgCanCtx.moveTo(x, y);
+	fgCanCtx.strokeStyle = brushColor;
 }
 
 function startPaint() {
@@ -57,24 +58,23 @@ function startPaint() {
 
 function endPaint() {
 	isPainting = false;
-	context.beginPath();
+	fgCanCtx.beginPath();
 }
 
 function doPaint() {
 	if (isPainting == true) {
-		draw(x,y)
+		draw(x, y)
 	}
 }
 
 
 function clearCanvas() {
-	var fgCanCtx = canvasFg.getContext('2d');
 	fgCanCtx.clearRect(0, 0, canvasFg.width, canvasFg.height);
 	canvasFg.style.backgroundColor = 'transparent';
 	var bgCanCtx = canvasBg.getContext('2d');
 	bgCanCtx.clearRect(0, 0, canvasBg.width, canvasBg.height);
 	canvasBg.style.backgroundColor = 'transparent';
-	}
+}
 
 
 // Copyright 2015 Owen Astrachan, Drew Hilton, Susan Rodger, Robert Duvall
@@ -197,7 +197,7 @@ SimpleImage = function() {
 			}
 		}
 	];
-// call appropriate constructor
+	// call appropriate constructor
 	var htmlImage = funMap[arguments.length].apply(this, arguments);
 	// actual content is backed by an invisible canvas
 	this.canvas = __SimpleImageUtilities.makeHTMLCanvas('SimpleImageCanvas');
@@ -507,48 +507,48 @@ function doBgUpload() {
 	bgImage.drawTo(imgCanvasBg);
 }
 
-function downloadCanvas() {  
-    image = canvasFg.toDataURL();
-    var tmpLink = document.createElement("a");  
-    tmpLink.download = "image.png";
-    tmpLink.href = image;  
-    document.body.appendChild( tmpLink );  
-    tmpLink.click();  
-    document.body.removeChild( tmpLink );  
+function downloadCanvas() {
+	image = canvasFg.toDataURL();
+	var tmpLink = document.createElement("a");
+	tmpLink.download = "image.png";
+	tmpLink.href = image;
+	// document.body.appendChild(tmpLink);
+	tmpLink.click();
+	// document.body.removeChild(tmpLink);
 }
 
 function createComposite() {
-  // this function creates a new image with the dimensions of the foreground image and returns the composite green screen image
-  var output = new SimpleImage(fgImage.getWidth(),fgImage.getHeight());
-  var greenThreshold = 240;
-  for (var pixel of fgImage.values()) {
-    var x = pixel.getX();
-    var y = pixel.getY();
-    if (pixel.getGreen() > greenThreshold) {
-      //pixel is green, use background
-      var bgPixel = bgImage.getPixel(x,y);
-      output.setPixel(x,y,bgPixel);
-    }
-    else {
-      //pixel is not green, use foreground
-      output.setPixel(x,y,pixel);
-    }
-  }
-  return output;
+	// this function creates a new image with the dimensions of the foreground image and returns the composite green screen image
+	var output = new SimpleImage(fgImage.getWidth(), fgImage.getHeight());
+	var greenThreshold = 240;
+	for (var pixel of fgImage.values()) {
+		var x = pixel.getX();
+		var y = pixel.getY();
+		if (pixel.getGreen() > greenThreshold) {
+			//pixel is green, use background
+			var bgPixel = bgImage.getPixel(x, y);
+			output.setPixel(x, y, bgPixel);
+		}
+		else {
+			//pixel is not green, use foreground
+			output.setPixel(x, y, pixel);
+		}
+	}
+	return output;
 }
 
 function doGreenScreen() {
-  if(fgImage == null || !fgImage.complete()) {
-alert("Foreground image not loaded!");
-}
-if (bgImage == null || !bgImage.complete()) {
-alert("Background image not loaded!");
-}
-  if (fgImage.getWidth() != bgImage.getWidth() | fgImage.getHeight() != bgImage.getHeight())
-    {
-      alert("Size of images do not match, using size of foreground image...");
-bgImage.setSize(fgImage.getWidth(),fgImage.getHeight()); }
-  clearCanvas();
-   var finalImage = createComposite();
-  finalImage.drawTo(canvasFg);
+	if (fgImage == null || !fgImage.complete()) {
+		alert("Foreground image not loaded!");
+	}
+	if (bgImage == null || !bgImage.complete()) {
+		alert("Background image not loaded!");
+	}
+	if (fgImage.getWidth() != bgImage.getWidth() | fgImage.getHeight() != bgImage.getHeight()) {
+		alert("Size of images do not match, using size of foreground image...");
+		bgImage.setSize(fgImage.getWidth(), fgImage.getHeight());
+	}
+	clearCanvas();
+	var finalImage = createComposite();
+	finalImage.drawTo(canvasFg);
 }
