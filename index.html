@@ -12,17 +12,19 @@
 <body>
 	<h1> Gabe's Simple Drawing Canvas WIP 😊 </h1>
 	<br>
-	<p> Set Canvas Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
-	<p> Set Canvas Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
+	<p title="Set the width of the left canvas using whole numbers only!"> Set Canvas Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
+	<p title="Set the height of the left canvas using whole numbers only!"> Set Canvas Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
 	<br>
 	<canvas id="d1" onmousedown="startPaint()" onmousemove="draw(event.offsetX, event.offsetY)" onmouseup="endPaint()" onmouseleave="endPaint()" style="border:2px solid #000000;">	</canvas>
 	<canvas id="d2" style="border:2px solid #000000;"></canvas>
+	<span id="help" data-hover="1. Use the left canvas to draw
+2. To create a Green Screen effect image, load the corresponding foreground and background images"> Basic Info </span>
 	<p> Brush Color: <input type="color" id="brushColor" value="#000" onchange="changeBrushClr(this.value)"> Brush Size: <input type="range" id="sizeInput" min="1" max="50" oninput="brushSize(this.value)"/> <output id="sizeOutput">25</output> px </p>
 	<br>
-	<input type="button" id="canvasChanger" class="colorButtons" value="Apply canvas 1. color" onclick="doChange()">
+	<input type="button" id="canvasChanger" class="colorButtons" value="Apply left canvas color" onclick="doChange()">
 	<input type="color" id="colorPicker" value="#ff0000"/>
-	<input type="button" id="createBtn" class="colorButtons" value="Create Composite" onclick="doGreenScreen()">
-	<input type="button" id="clear" class="clearButton" value="Clear Canvases" onclick="clearCanvas()">
+	<input type="button" id="createBtn" class="colorButtons" value="Apply Green Screen Effect" onclick="doGreenScreen()">
+	<input type="button" id="clear" title="Clear the canvases of any pictures, drawings or coloring" class="clearButton" value="Clear Canvases" onclick="clearCanvas()">
 <p> Foreground Image
 	<input type="file" id="fgUploader" multiple="false" accept='image/' onchange="doFgUpload()">
 	</p>
