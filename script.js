@@ -71,6 +71,16 @@ function doPaint() {
 function clearCanvas() {
 	fgCanCtx.clearRect(0, 0, canvasFg.width, canvasFg.height);
 	canvasFg.style.backgroundColor = 'transparent';
+	fgImage = null;
+	var bgCanCtx = canvasBg.getContext('2d');
+	bgCanCtx.clearRect(0, 0, canvasBg.width, canvasBg.height);
+	canvasBg.style.backgroundColor = 'transparent';
+	bgImage = null;
+}
+
+function clearCanvasGS() {
+	fgCanCtx.clearRect(0, 0, canvasFg.width, canvasFg.height);
+	canvasFg.style.backgroundColor = 'transparent';
 	var bgCanCtx = canvasBg.getContext('2d');
 	bgCanCtx.clearRect(0, 0, canvasBg.width, canvasBg.height);
 	canvasBg.style.backgroundColor = 'transparent';
@@ -546,9 +556,8 @@ function doGreenScreen() {
 	}
 	if (fgImage.getWidth() != bgImage.getWidth() | fgImage.getHeight() != bgImage.getHeight()) {
 		alert("Size of images do not match, using size of foreground image...");
-		bgImage.setSize(fgImage.getWidth(), fgImage.getHeight());
-	}
-	clearCanvas();
+		bgImage.setSize(fgImage.getWidth(), fgImage.getHeight()); }
+	clearCanvasGS();
 	var finalImage = createComposite();
 	finalImage.drawTo(canvasFg);
 }

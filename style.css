@@ -7,20 +7,19 @@ html, body {
   background-position: center;
   background-size: cover;
   color: #292929;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 h1 {
-font-family: Helvetica;
 font-size: 25px;
 position: relative;
 left: 20px;
-top: 40px;
+top: 30px;
 }
 
 p {
 color: #0a0a0a;
 margin-left: 20px;
-font-family: Helvetica;
 font-size: 22px
 }
 
@@ -29,16 +28,20 @@ font-size: 22px
 }
 
 #help {
-  position: relative;
+  position: fixed;
+	left: 700px;
+	 font-family: "Helvetica";
+  font-size: 25px;
+  text-decoration: underline #878787;
 }
 
 #help:before {
   content: attr(data-hover);
   visibility: hidden;
-  opacity: 0;
-  width: 140px;
-  background-color: black;
-  color: #fff;
+  opacity: 0.7;
+  width: 250px;
+  background: transparent;
+  color: #000000;
   text-align: center;
   border-radius: 5px;
   padding: 5px 0;
@@ -67,23 +70,28 @@ padding: 7px;
 }
 
 #downloadBTN {
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
   position: relative;
-  right: 50px;
+  bottom: 20px;
+	left: 20px;
 }
 
 
 .colorButtons {
-  font-family: Helvetica;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-weight: bold;
   font-size: 15px;
-  margin-left: 10px;
+  margin-left: 20px;
   padding: 7px;	
 }
 
 .clearButton {
-  font-family: Helvetica;
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-size: 15px;
   font-weight: bolder;
   margin-left: 10px;
   padding: 7px;		
+}
+#imageCredit {
+	margin-left: 20px;
 }
