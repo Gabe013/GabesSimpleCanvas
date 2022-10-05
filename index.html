@@ -24,7 +24,12 @@
 	<input type="button" id="canvasChanger" class="colorButtons" value="Apply left canvas color" onclick="doChange()">
 	<input type="color" id="colorPicker" value="#ff0000"/>
 	<input type="button" id="createBtn" class="colorButtons" value="Apply Green Screen Effect" onclick="doGreenScreen()">
+	<input type="button" class="colorButtons" value="Apply Red Filter" onclick="applyRed()">
+	<input type="button" class="colorButtons" value="Apply Grayscale" onclick="applyGrayScale()">
+	<input type="button" class="colorButtons" value="Apply Euler's Ghost Filter" onclick="applyEulersGhostFilter()">
+	<br>
 	<input type="button" id="clear" title="Clear the canvases of any pictures, drawings or coloring" class="clearButton" value="Clear Canvases" onclick="clearCanvas()">
+	<input type="button" id="revertButton" class="clearButton" value="Revert to Original Image" onclick="revert()">
 <p> Foreground Image
 	<input type="file" id="fgUploader" multiple="false" accept='image/' onchange="doFgUpload()">
 	</p>
@@ -40,8 +45,11 @@
   teal, blue, blurple, magenta, pink!
   -->
 	<script src="script.js" defer></script>
+	<script src="SimpleImage.js" defer></script>
 	<script src="https://replit.com/public/js/replit-badge.js" theme="light" defer></script>
 	<br>
 <a href="https://www.freepik.com/free-vector/colorful-watercolor-rainbow-background_9458303.htm#query=colorful%20background&position=6&from_view=search" id="imageCredit" target="_blank"> <u>Background image by Vectonauta</u></a> on Freepik
+	<br>
+	<a href="https://www.dukelearntoprogram.com/downloads/openSourceJS.php?course=1" id="sourceCodeCredit" target="_blank"> <u>SimpleImage Source Code Copyright held by: O. Astrachan, R. Duvall, A. Hilton, and S. Rodger. </u>
 </body>
 </html>
