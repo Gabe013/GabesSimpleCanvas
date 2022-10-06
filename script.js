@@ -3,7 +3,10 @@ var fgCanCtx = canvasFg.getContext('2d');
 var canvasBg = document.getElementById("d2");
 var fgImage = null;
 var bgImage = null;
-var copyImage = null;
+var copyImage;
+var redImage;
+var grayImage;
+var eulerImage;
 var fileUpload;
 var fileUploadBg;
 var sizeBrush = document.getElementById("sizeInput").value;
@@ -82,8 +85,8 @@ function clearCanvas() {
 }
 
 function clearCanvasGS() {
-	fgCanCtx.clearRect(0, 0, canvasFg.width, canvasFg.height);
-	canvasFg.style.backgroundColor = 'transparent';
+	/* fgCanCtx.clearRect(0, 0, canvasFg.width, canvasFg.height);
+	canvasFg.style.backgroundColor = 'transparent'; */
 	var bgCanCtx = canvasBg.getContext('2d');
 	bgCanCtx.clearRect(0, 0, canvasBg.width, canvasBg.height);
 	canvasBg.style.backgroundColor = 'transparent';
@@ -95,6 +98,9 @@ function doFgUpload() {
 	fgImage = new SimpleImage(fileUpload);
 	fgImage.drawTo(canvasFg);
 	copyImage = fgImage;
+	redImage = fgImage;
+	grayImage = fgImage;
+	eulerImage = fgImage;
 }
 
 function doBgUpload() {
@@ -147,14 +153,19 @@ function doGreenScreen() {
 	var finalImage = createComposite();
 	finalImage.drawTo(canvasFg);
 	copyImage = finalImage;
+	fgImage = finalImage;
+	redImage = finalImage;
+	grayImage = finalImage;
+	eulerImage = finalImage;
+	alert("Green Screen Effect Applied!");
 }
 
 function applyRed() {
-  if ( fgImage == null)
+  if ( redImage == null || !redImage.complete())
     {
       alert("No image uploaded. Please upload an image!");
     }
-	var redImage = fgImage;
+	redImage = new SimpleImage(redImage);
 	for (var pixel of redImage.values()) {
     var avg = (pixel.getRed() + pixel.getGreen() + pixel.getBlue() + pixel.getAlpha())/4;
     if (avg < 128)
@@ -174,11 +185,11 @@ function applyRed() {
 	}
 
 function applyGrayScale() {
-  if (fgImage == null)
+  if (fgImage == null || !grayImage.complete() )
     { 
       alert("No image loaded. Please upload an image!");
     }
-	var grayImage = fgImage;
+	grayImage = new SimpleImage(grayImage);
 for (var pixel of grayImage.values())
 {
  var avg = (pixel.getRed() + pixel.getGreen() + 
@@ -192,11 +203,11 @@ for (var pixel of grayImage.values())
 }
 
 function applyEulersGhostFilter() {
-if ( fgImage == null)
+if ( fgImage == null || !eulerImage.complete())
     {
       alert("No image uploaded. Please upload an image!");
     }
-	var eulerImage = fgImage;
+eulerImage = new SimpleImage(eulerImage);
 for (var pixel of eulerImage.values()) {
 var avg = (pixel.getRed() + pixel.getGreen() + pixel.getBlue())/Math.E;
 if (avg < 128 && (pixel.getX() + pixel.getY()) < ((pixel.getX() + pixel.getY())/Math.E))
@@ -217,11 +228,10 @@ if (avg < 128 && (pixel.getX() + pixel.getY()) < ((pixel.getX() + pixel.getY())/
 }
 
 function revert() {
-  if (fgImage == null)
+  if (fgImage == null || !fgImage.complete())
     {
 	 alert("Upload an image first, please!");
 } else {
-		copyImage = new SimpleImage(fileUpload);
 	  copyImage.drawTo(canvasFg);
   alert("Image restored to original!");
 }
