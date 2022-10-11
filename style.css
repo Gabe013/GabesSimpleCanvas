@@ -61,6 +61,10 @@ font-size: 22px
 	margin-left: 10px;
 }
 
+#colorPicker {
+	margin-left: 20px;
+}
+
 #fileUploader {
 margin-left: 7px;
 font-family: Helvetica;
@@ -86,10 +90,11 @@ padding: 7px;
 }
 
 .clearButton {
-	font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-size: 15px;
   font-weight: bolder;
-  margin-left: 40px;
-  margin-top: 10px;
+  margin-left: 20px;
+  margin-block: 20px;
+  margin-top: 20px;
   padding: 7px;		
 }

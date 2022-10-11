@@ -28,13 +28,17 @@
 	<input type="button" class="colorButtons" value="Apply Red Filter" onclick="applyRed()">
 	<input type="button" class="colorButtons" value="Apply Grayscale" onclick="applyGrayScale()">
 	<input type="button" class="colorButtons" value="Apply Euler's Ghost Filter" onclick="applyEulersGhostFilter()">
-	<br>
+	<input type="button" class="colorButtons" value="Apply Rainbow Filter" onclick="applyRainbow()">
+	<!--
+	<br><
+	<input type="button" class="colorButtons" value="Apply Blur Filter" onclick="applyBlur()">
+	<br> -->
 	<input type="button" id="clear" title="Clear the canvases of any pictures, drawings or coloring" class="clearButton" value="Clear Canvases" onclick="clearCanvas()">
 	<input type="button" id="revertButton" class="clearButton" value="Revert to Original Image" onclick="revert()">
-<p> Foreground Image
+<p> Foreground Image (Left Canvas)
 	<input type="file" id="fgUploader" multiple="false" accept='image/' onchange="doFgUpload()">
 	</p>
-	<p> Background Image
+	<p> Background Image (Right Canvas)
 	<input type="file" id="bgUploader" multiple="false" accept='image/' onchange="doBgUpload()">
 	</p>
 	<br>
