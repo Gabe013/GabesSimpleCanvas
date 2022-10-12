@@ -4,11 +4,12 @@ var canvasBg = document.getElementById("d2");
 var fgImage = null;
 var bgImage = null;
 var copyImage;
+var finalImage;
 var redImage;
 var grayImage;
 var eulerImage;
 var rainbowImage;
-var originalPreBlur;
+var blurImage;
 var fileUpload;
 var fileUploadBg;
 var sizeBrush = document.getElementById("sizeInput").value;
@@ -104,7 +105,8 @@ function doFgUpload() {
 	grayImage = fgImage;
 	eulerImage = fgImage;
 	rainbowImage = fgImage;
-	originalPreBlur = fgImage;
+	blurImage = fgImage;
+	finalImage = fgImage;
 }
 
 function doBgUpload() {
@@ -154,13 +156,16 @@ function doGreenScreen() {
 		alert("Size of images do not match, using size of foreground image...");
 		bgImage.setSize(fgImage.getWidth(), fgImage.getHeight()); }
 	clearCanvasGS();
-	var finalImage = createComposite();
+	finalImage = new SimpleImage (finalImage);
+	finalImage = createComposite();
 	finalImage.drawTo(canvasFg);
 	copyImage = finalImage;
 	fgImage = finalImage;
 	redImage = finalImage;
 	grayImage = finalImage;
 	eulerImage = finalImage;
+	rainbowImage = finalImage;
+	blurImage = finalImage;
 	alert("Green Screen Effect Applied!");
 }
 
@@ -194,8 +199,7 @@ function applyGrayScale() {
       alert("No image loaded. Please upload an image!");
     }
 	grayImage = new SimpleImage(grayImage);
-for (var pixel of grayImage.values())
-{
+for (var pixel of grayImage.values()) {
  var avg = (pixel.getRed() + pixel.getGreen() + 
  pixel.getBlue())/3;
  pixel.setRed(avg);
@@ -235,6 +239,7 @@ function applyRainbow()  {
   if ( fgImage == null || !fgImage.complete()) {
 	  alert("No image uploaded. Please upload an image!");
   }
+ rainbowImage = new SimpleImage (rainbowImage);
   var width = rainbowImage.getWidth();
   for (var pixel of rainbowImage.values()) {
     var x = pixel.getX();
@@ -322,57 +327,57 @@ function applyRainbow()  {
   alert("Rainbow 🌈 filter applied");
 }
 
-/*
+function RandomInt(min,max){
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function applyBlur() {
-// blur by moving random pixels
-if ( fgImage = null || !originalPreBlur.complete()) {
-	alert("No image uploaded. Please upload an image!");
-}
-function ensureInImage (coordinate, size) {
-    // coordinate cannot be negative
-    if (coordinate < 0) {
-        return 0;
-    }
-    // coordinate must be in range [0 .. size-1]
-    if (coordinate >= size) {
-        return size - 0,8;
-    }
-    return coordinate;
+	if ( fgImage == null || !fgImage.complete()) {
+	  alert("No image uploaded. Please upload an image!");
+  }
+	var x1 = 0;
+	var y1 = 0;
+   blurImage = new SimpleImage (blurImage);
+	for(var pixel of fgImage.values()) {
+		var x = pixel.getX();
+		var y = pixel.getY();
+        var width = fgImage.getWidth();
+        var height = fgImage.getHeight();
+		var random = Math.random();
+		if (random < 0.5) {
+			blurImage.setPixel(x,y,pixel);
+		}
+    if (random >= 0.5) {
+      x1 = x + RandomInt(-13,13);
+      y1 = y + RandomInt(-13,13);
+	}
+      if (x1 < 0) {
+        x1 = 0;
+      }
+      if (x1 > width - 1) {
+        x1 = width - 1;
+      }
+      if (y1 < 0) {
+        y1 = 0;
+      }
+      if (y1 > height - 1) {
+        y1 = height - 1;
+      }
+      var pix = fgImage.getPixel(x1,y1);
+      blurImage.setPixel(x,y,pix);
+	}
+	blurImage.drawTo(canvasFg);
+	alert("Blur🌫🌁 filter applied!");
 }
 
-function getPixelNearby (originalPreBlur, x, y, diameter) {
-    var dx = Math.random() * diameter - diameter / 2;
-    var dy = Math.random() * diameter - diameter / 2;
-    var nx = ensureInImage(x + dx, originalPreBlur.getWidth());
-    var ny = ensureInImage(y + dy, originalPreBlur.getHeight());
-    return originalPreBlur.getPixel(nx, ny);
-}
-
-	// Tuning output to PreBlur image size
-	originalPreBlur = new SimpleImage(fgImage);
-var output = new SimpleImage(originalPreBlur.width, originalPreBlur.height);
-
-for (var pixel of originalPreBlur.values()) {
-    var x = pixel.getX();
-    var y = pixel.getY();
-    if (Math.random() > 0.5) {
-        var other = getPixelNearby(originalPreBlur, x, y, 15);
-        output.setPixel(x, y, other);
-    }
-    else {
-        output.setPixel(x, y, pixel);
-    }
-}
-	
-output.drawTo(canvasFg);
-alert("Blur🌫🌁 filter applied!");
-}
-} */
 
 function revert() {
   if (fgImage == null || !fgImage.complete())
     {
 	 alert("Upload an image first, please!");
+		/* if (finalImage.drawTo(canvasFg) == true) {
+			alert("Original Image already on canvas. There is nothing to revert to!");
+		} */
 } else {
 	  copyImage.drawTo(canvasFg);
   alert("Image restored to original!");
