@@ -1,6 +1,8 @@
 html, body {
   height: 100%;
   width: 100%;
+  justify-content: center;
+  align-items: center;
   background-image: url("151.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -8,6 +10,7 @@ html, body {
   background-size: cover;
   color: #292929;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+  
 }
 
 h1 {
@@ -15,6 +18,10 @@ font-size: 25px;
 position: relative;
 left: 20px;
 top: 30px;
+}
+
+canvas {
+	width: 50%;
 }
 
 p {

@@ -1,23 +1,4 @@
-var canvasFg = document.getElementById("d1");
-var fgCanCtx = canvasFg.getContext('2d');
-var canvasBg = document.getElementById("d2");
-var fgImage = null;
-var bgImage = null;
-var copyImage;
-var finalImage;
-var redImage;
-var grayImage;
-var eulerImage;
-var rainbowImage;
-var blurImage;
-var fileUpload;
-var fileUploadBg;
-var sizeBrush = document.getElementById("sizeInput").value;
-var brushColor = document.getElementById("brushColor").value;
-var isPainting = false;
-// var brushDefault = true;
-
-function isNumeric(value) {
+/* function isNumeric(value) {
 	// standard JavaScript function to determine whether a string is an illegal number (Not-a-Number)
 	return !isNaN(value);
 }
@@ -32,7 +13,7 @@ function setHeight(value) {
 	if (isNumeric(value) == true) {
 		canvasFg.height = value;
 	} else { alert("Invalid input type, please enter a whole number, i.e. 300 or 1000") }
-}
+} */
 
 function changeBrushClr(newColor) {
 	brushColor = newColor;
@@ -101,7 +82,6 @@ function doFgUpload() {
 	fgImage = new SimpleImage(fileUpload);
 	fgImage.drawTo(canvasFg);
 	copyImage = fgImage;
-	redImage = fgImage;
 	grayImage = fgImage;
 	eulerImage = fgImage;
 	rainbowImage = fgImage;
@@ -161,7 +141,6 @@ function doGreenScreen() {
 	finalImage.drawTo(canvasFg);
 	copyImage = finalImage;
 	fgImage = finalImage;
-	redImage = finalImage;
 	grayImage = finalImage;
 	eulerImage = finalImage;
 	rainbowImage = finalImage;
@@ -169,13 +148,13 @@ function doGreenScreen() {
 	alert("Green Screen Effect Applied!");
 }
 
-function applyRed() {
-  if ( redImage == null || !redImage.complete())
+function applyRed(image) {
+  if ( fgImage == null || !fgImage.complete())
     {
       alert("No image uploaded. Please upload an image!");
     }
-	redImage = new SimpleImage(redImage);
-	for (var pixel of redImage.values()) {
+	image = new SimpleImage(fgImage);
+	for (var pixel of image.values()) {
     var avg = (pixel.getRed() + pixel.getGreen() + pixel.getBlue() + pixel.getAlpha())/4;
     if (avg < 128)
     {
@@ -189,7 +168,7 @@ function applyRed() {
         pixel.setBlue((avg * 3) - 255);
     }
 	}
-	redImage.drawTo(canvasFg);
+	image.drawTo(canvasFg);
   alert("Red filter applied!");
 	}
 
@@ -383,3 +362,23 @@ function revert() {
   alert("Image restored to original!");
 }
 }
+
+var canvasFg = document.getElementById("d1");
+var heightRatio = 1;
+canvasFg.height = canvasFg.width * heightRatio;
+var fgCanCtx = canvasFg.getContext('2d');
+var canvasBg = document.getElementById("d2");
+canvasBg.height = canvasBg.width * heightRatio;
+var fgImage = null;
+var bgImage = null;
+var copyImage;
+var finalImage;
+var grayImage;
+var eulerImage;
+var rainbowImage;
+var blurImage;
+var fileUpload;
+var fileUploadBg;
+var sizeBrush = document.getElementById("sizeInput").value;
+var brushColor = document.getElementById("brushColor").value;
+var isPainting = false;

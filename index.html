@@ -1,4 +1,4 @@
-<!--redesign the spacing between buttons and elements --> 
+<!--redesign the spacing between buttons and elements via proper selectors --> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +10,18 @@
 </head>
   
 <body>
+	<!-- How to position relatively the parent, child and relative positions without making a mess?!--->
+	<main>
+		<div id="titleBars">
 	<h1> Gabe's Simple Drawing Canvas WIP 😊 </h1>
-	<span id="help" data-hover="1. Use the left canvas to draw
+	<br>
+<!--	<p title="Set the width of the left canvas using whole numbers only!"> Set Canvas Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
+<p title="Set the height of the left canvas using whole numbers only!"> Set Canvas Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
+	<br> -->
+		</div>
+		<span id="help" data-hover="1. Use the left canvas to draw
 2. To create a Green Screen effect image, load the corresponding foreground and background images
 3. Make sure to load an image before applying a filter"> Basic Info </span>
-	<br>
-	<p title="Set the width of the left canvas using whole numbers only!"> Set Canvas Width (whole number) <input type="text" onchange="setWidth(this.value)"</p>
-	<p title="Set the height of the left canvas using whole numbers only!"> Set Canvas Height (whole number) <input type="text" onchange="setHeight(this.value)"</p>
-	<br>
 	<canvas id="d1" onmousedown="startPaint()" onmousemove="draw(event.offsetX, event.offsetY)" onmouseup="endPaint()" onmouseleave="endPaint()" style="border:2px solid #000000;">	</canvas>
 	<canvas id="d2" style="border:2px solid #000000;"></canvas>
 	<p> Brush Color: <input type="color" id="brushColor" value="#000" onchange="changeBrushClr(this.value)"> Brush Size: <input type="range" id="sizeInput" min="1" max="50" oninput="brushSize(this.value)"/> <output id="sizeOutput">25</output> px </p>
@@ -35,6 +39,7 @@
 	<br>
 	<input type="button" id="clear" title="Clear the canvases of any pictures, drawings or coloring" class="clearButton" value="Clear Canvases" onclick="clearCanvas()">
 	<input type="button" id="revertButton" class="clearButton" value="Revert to Original Image" onclick="revert()">
+		</main>
 <p> Foreground Image (Left Canvas)
 	<input type="file" id="fgUploader" multiple="false" accept='image/' onchange="doFgUpload()">
 	</p>
