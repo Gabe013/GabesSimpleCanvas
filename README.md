@@ -5,6 +5,8 @@ The abovementioned source code is licensed under Apache License, Version 2.0 htt
 Credits: 1. Background image by Vectonauta on Freepik and Christopher Thornton @Instructobit for the download button 🔳 code - https://instructobit.com/tutorial/109/Downloading-and-saving-an-HTML-canvas-as-an-image-using-Javascript
 2. Brush style and attributes code and instructions:  Dev Ed's Video https://www.youtube.com/watch?v=3GqUM4mEYKA
 3. Blur Filter code basis (thanks to Madeline Snipes) : https://codepen.io/msnipes/pen/jOmwjdz
-To-Do:
+
+## To-Do:
+
 1. Add touchscreen support (one day... :)
 2. Redesign the buttons and overall look
